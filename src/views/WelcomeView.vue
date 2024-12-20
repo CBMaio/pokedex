@@ -1,7 +1,9 @@
 <script setup>
 import WelcomeImg from '@/assets/img/welcome-img.svg'
 import CustomButton from '@/components/structure/CustomButton.vue'
-import router from '@/router'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const goToList = function () {
   router.push({ name: 'list' })

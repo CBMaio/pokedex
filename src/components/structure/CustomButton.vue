@@ -16,6 +16,7 @@ defineEmits(['action'])
   background-color: var(--primary);
   color: var(--white);
   border: none;
+  font-family: 'LatoBold';
   font-size: 18px;
   font-weight: 700;
   line-height: 21.6px;

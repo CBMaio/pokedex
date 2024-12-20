@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "MontserratRegular";
+  font-weight: 500;
+  src: url(./Montserrat/Montserrat-Medium.ttf);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LatoRegular";
+  font-weight: 400;
+  src: url(./Lato/Lato-Regular.ttf);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LatoBold";
+  font-weight: 700;
+  src: url(./Lato/-Bold.ttf);
+  font-display: swap;
+}

@@ -4,7 +4,7 @@ import EmptyState from '@/components/structure/EmptyState.vue'
 import { usePokemonStore } from '@/stores/pokemon'
 import { computed } from 'vue'
 import BottomNavbar from '@/components/structure/BottomNavbar.vue'
-import PokemonList from '@/components/Pokemon/PokemonList.vue'
+import PokemonList from '@/components/pokemon/PokemonList.vue'
 
 const router = useRouter()
 const pokemonStore = usePokemonStore()

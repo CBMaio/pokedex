@@ -1,4 +1,5 @@
 import { getPokemon, getPokemones } from '@/services/pokemonService'
+import { formatWord } from '@/utils'
 import { defineStore } from 'pinia'
 
 export const usePokemonStore = defineStore('pokemon', {
@@ -14,11 +15,19 @@ export const usePokemonStore = defineStore('pokemon', {
     getFavorites() {
       return this.favorites
     },
+    getSelectedPokemon() {
+      return this.selectedPokemon
+    },
     getSelectedPokemonTypes() {
       const { types } = this.selectedPokemon || {}
       if (!types) return []
 
-      return types.map(({ type }) => type.name)
+      return types.map(({ type }) => formatWord(type.name))
+    },
+    getPokemonProperties() {
+      const data = { ...this.selectedPokemon, types: this.getSelectedPokemonTypes.join(', ') }
+      delete data.image
+      return Object.entries(data)
     },
   },
   actions: {
@@ -34,9 +43,10 @@ export const usePokemonStore = defineStore('pokemon', {
     },
     async setSelectedPokemon({ name: selectedName }) {
       const response = await getPokemon({ name: selectedName })
-      const { name, weight, height, types } = response
+      const { name, weight, height, types, sprites } = response
+      const image = sprites.other['official-artwork'].front_default
 
-      this.selectedPokemon = { name, weight, height, types }
+      this.selectedPokemon = { name, weight, height, types, image }
     },
   },
 })

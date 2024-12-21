@@ -35,6 +35,6 @@ const navigate = function (name) {
   </div>
 </template>
 
-<style>
+<style scoped>
 @import '@/assets/styles/components/bottomNavbar.css';
 </style>

@@ -1,16 +1,19 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { usePokemonStore } from '@/stores/pokemon'
-import PokemonItem from './PokemonItem.vue'
+import PokemonItem from '@/components/pokemon/PokemonItem.vue'
+import SelectedPokemonModal from '../modals/SelectedPokemonModal.vue'
 
 const pokemonStore = usePokemonStore()
+const isOpenModal = ref(false)
 
 onMounted(async () => {
   await pokemonStore.setPokemones()
 })
 
-const openPokemonModal = function (name) {
-  pokemonStore.setSelectedPokemon({ name })
+const openPokemonModal = async function (name) {
+  await pokemonStore.setSelectedPokemon({ name })
+  isOpenModal.value = true
 }
 </script>
 
@@ -23,6 +26,8 @@ const openPokemonModal = function (name) {
       @view-details="openPokemonModal"
     />
   </div>
+
+  <SelectedPokemonModal v-if="isOpenModal" @close="isOpenModal = false" />
 </template>
 
 <style></style>

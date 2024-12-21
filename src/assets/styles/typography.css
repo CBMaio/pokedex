@@ -1,0 +1,11 @@
+.black-letter {
+  color: var(--black);
+}
+
+.gray-letter {
+  color: var(--darkGray);
+}
+
+.font-bold {
+  font-family: "LatoBold";
+}

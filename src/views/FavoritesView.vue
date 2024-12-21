@@ -4,12 +4,11 @@ import EmptyState from '@/components/structure/EmptyState.vue'
 import { usePokemonStore } from '@/stores/pokemon'
 import { computed } from 'vue'
 import BottomNavbar from '@/components/structure/BottomNavbar.vue'
-import PokemonList from '@/components/Pokemon/PokemonList.vue'
 
-const router = useRouter()
 const pokemonStore = usePokemonStore()
+const router = useRouter()
 
-const isEmptyState = computed(() => !pokemonStore.pokemones?.length)
+const isEmptyState = computed(() => !pokemonStore.favorites.length)
 
 const goToMainScreen = function () {
   router.push({ name: 'home' })
@@ -19,10 +18,7 @@ const goToMainScreen = function () {
 <template>
   <div class="view-container">
     <div class="list-body">
-      <div class="list-content">
-        <EmptyState v-if="isEmptyState" @go-back="goToMainScreen" />
-        <PokemonList />
-      </div>
+      <EmptyState v-if="isEmptyState" @go-back="goToMainScreen" />
     </div>
 
     <BottomNavbar v-if="!isEmptyState" />

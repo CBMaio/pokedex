@@ -1,0 +1,31 @@
+.main {
+  padding: 30px;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.global-container {
+  max-width: var(--elements-max-widht);
+  text-align: center;
+
+  .main-logo {
+    &:path {
+      max-width: 100%;
+    }
+  }
+}
+
+.title {
+  font-size: 26px;
+  line-height: 31.2px;
+  margin-top: 60px;
+}
+
+.description {
+  margin: 30px auto 50px;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 500;
+}

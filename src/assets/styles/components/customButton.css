@@ -1,0 +1,19 @@
+.button {
+  background-color: var(--lightGray);
+  background-color: var(--primary);
+  border-radius: 60px;
+  border: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  font-family: 'LatoBold';
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21.6px;
+  padding: 11px 20px;
+  text-align: center;
+
+  &.unselected {
+    background-color: var(--lightGray);
+  }
+}

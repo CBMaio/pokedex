@@ -1,0 +1,18 @@
+.container {
+  margin-top: 50px;
+  text-align: center;
+
+  .title {
+    font-family: 'LatoBold';
+    font-size: 36px;
+    line-height: 43.2px;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 10px auto 25px;
+    text-align: center;
+  }
+}

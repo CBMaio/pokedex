@@ -1,0 +1,19 @@
+.footer {
+  box-shadow: 0px -5px 4px 0px #0000000D;
+  padding: 18px 30px;
+
+  .container {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: var(--elements-max-widht);
+    margin: auto;
+
+    .button-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+}

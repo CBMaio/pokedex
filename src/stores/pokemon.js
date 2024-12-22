@@ -5,12 +5,13 @@ import { defineStore } from 'pinia'
 export const usePokemonStore = defineStore('pokemon', {
   state: () => ({
     pokemones: [],
-    favorites: [],
+    filteredPokemones: [],
+    favorites: new Map(),
     selectedPokemon: {},
   }),
   getters: {
     getPokemones() {
-      return this.pokemones
+      return this.filteredPokemones || []
     },
     getFavorites() {
       return this.favorites
@@ -24,22 +25,22 @@ export const usePokemonStore = defineStore('pokemon', {
 
       return types.map(({ type }) => formatWord(type.name))
     },
-    getPokemonProperties() {
-      const data = { ...this.selectedPokemon, types: this.getSelectedPokemonTypes.join(', ') }
-      delete data.image
-      return Object.entries(data)
-    },
   },
   actions: {
-    addFavorite({ pokemon }) {
-      this.favorites.push(pokemon)
+    handleFavorite({ pokemon: { name, ...data } }) {
+      this.favorites.has(name)
+        ? this.favorites.delete(name)
+        : this.favorites.set(name, { name, ...data })
     },
-    removeFavorite({ id }) {
-      this.favorites.filter(({ id: pokemonId }) => pokemonId !== id)
+    filterPokemones({ query = '' }) {
+      this.filteredPokemones = !query
+        ? this.pokemones
+        : this.pokemones.filter(({ name }) => name.includes(query.toLowerCase()))
     },
     async setPokemones() {
       const response = await getPokemones()
       this.pokemones = response
+      this.filteredPokemones = response
     },
     async setSelectedPokemon({ name: selectedName }) {
       const response = await getPokemon({ name: selectedName })

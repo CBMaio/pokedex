@@ -3,7 +3,9 @@
   background-color: var(--white);
   border-radius: 5px;
   cursor: pointer;
-  display: flex;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 44px;
   height: 60px;
   justify-content: space-between;
   margin-bottom: 10px;

@@ -1,12 +1,18 @@
 <script setup>
 import FavoritesIcon from '@/assets/img/favorites-icon.svg'
 
-const handleFavorite = function () {}
+defineEmits(['handleFavorite'])
+defineProps({
+  isFavorite: {
+    type: Boolean,
+    default: false,
+  },
+})
 </script>
 
 <template>
-  <div class="favorite-action" @click="handleFavorite">
-    <FavoritesIcon class="favorite-icon" />
+  <div class="favorite-action" @click="$emit('handleFavorite')">
+    <FavoritesIcon class="favorite-icon" :class="{ 'is-favorite': isFavorite }" />
   </div>
 </template>
 
@@ -22,10 +28,16 @@ const handleFavorite = function () {}
   width: 44px;
 
   .favorite-icon {
-    & :deep(path) {
+    &:deep(path) {
       fill: var(--lightGray);
       height: 26px;
       width: 26px;
+    }
+
+    &.is-favorite {
+      &:deep(path) {
+        fill: var(--favoriteYellow);
+      }
     }
   }
 }

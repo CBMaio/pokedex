@@ -4,13 +4,24 @@ import CloseIcon from '@/assets/img/close-icon.svg'
 import { formatWord } from '@/utils'
 import CustomButton from '../structure/CustomButton.vue'
 import FavoriteButton from '../structure/FavoriteButton.vue'
+import { computed } from 'vue'
 
 defineEmits(['close'])
 
 const pokemonStore = usePokemonStore()
-const pokemon = pokemonStore.selectedPokemon
+const pokemon = computed(() => pokemonStore.selectedPokemon)
+const isFavorite = computed(() => pokemonStore.getFavorites.has(pokemon.value.name))
+const pokemonProperties = computed(() => {
+  const { name, height, weight } = pokemon.value || {}
+  const types = pokemonStore.getSelectedPokemonTypes.join(', ')
+
+  return Object.entries({ name, height, weight, types })
+})
 
 const share = function () {}
+const onHandleFavorite = function () {
+  pokemonStore.handleFavorite({ pokemon: pokemon.value })
+}
 </script>
 
 <template>
@@ -21,18 +32,14 @@ const share = function () {}
         <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image" />
       </div>
       <div class="body">
-        <div
-          v-for="[key, value] in pokemonStore.getPokemonProperties"
-          :key="key"
-          class="property-row"
-        >
+        <div v-for="[key, value] in pokemonProperties" :key="key" class="property-row">
           <span class="property-name font-bold"> {{ formatWord(key) }}: </span>
           <span class="property-value">{{ formatWord(value) }}</span>
         </div>
       </div>
       <footer class="footer">
         <CustomButton @action="share"> Share to my friends </CustomButton>
-        <FavoriteButton />
+        <FavoriteButton :is-favorite="isFavorite" @handle-favorite="onHandleFavorite" />
       </footer>
     </div>
   </div>

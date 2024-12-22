@@ -7,6 +7,12 @@
   --lightGray: #BFBFBF;
   --circleBackground: #F5F5F5;
   --grayBorder: #E8E8E8;
+  --info: #cce5ff;
+  --info-text: #004085;
+  --error: #f8d7da;
+  --error-text: #721c24;
+  --success: #d4edda;
+  --success-text: #155724;
   --favoriteYellow: #ECA539;
 
   --elements-max-widht: 570px;

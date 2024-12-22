@@ -6,7 +6,7 @@ export const usePokemonStore = defineStore('pokemon', {
   state: () => ({
     pokemons: [],
     filteredPokemons: [],
-    favorites: new Map(),
+    favorites: getInitialFavorites(),
     selectedPokemon: {},
     query: '',
     isLoading: false,
@@ -36,6 +36,8 @@ export const usePokemonStore = defineStore('pokemon', {
       this.favorites.has(name)
         ? this.favorites.delete(name)
         : this.favorites.set(name, { name, ...data })
+
+      saveLocalStorage(this.favorites)
     },
     filterPokemons({ query = '' }) {
       this.filteredPokemons = !query
@@ -83,3 +85,10 @@ export const usePokemonStore = defineStore('pokemon', {
 })
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const saveLocalStorage = (favorites) => {
+  localStorage.setItem('favorites', JSON.stringify([...favorites]))
+}
+const getInitialFavorites = () => {
+  const favorites = localStorage.getItem('favorites')
+  return new Map(JSON.parse(favorites) || [])
+}

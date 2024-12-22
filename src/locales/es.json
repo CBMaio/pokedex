@@ -1,0 +1,16 @@
+{
+  "welcome": "Bienvenido a Pokédex",
+  "welcomeDescription": "La enciclopedia digital creada por el Profesor Oak es una herramienta invaluable para los Entrenadores en el mundo Pokémon.",
+  "getStarted": "Comenzar",
+  "search": "Buscar",
+  "all": "Todos",
+  "favorites": "Favoritos",
+  "emptyStateTitle": "Uh-oh!",
+  "lookLostMessage": "¡Parece que estás perdido en tu viaje!",
+  "goBackHome": "Volver a casa",
+  "name": "Nombre",
+  "height": "Altura",
+  "weight": "Peso",
+  "types": "Tipos",
+  "shareToFriends": "Compartir con mis amigos"
+}

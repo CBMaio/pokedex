@@ -16,7 +16,7 @@ const handleSearch = function (e) {
       <input
         v-model="pokemonStore.query"
         type="text"
-        placeholder="Search"
+        :placeholder="$t('search')"
         class="search-element black-letter"
         @input="handleSearch"
       />

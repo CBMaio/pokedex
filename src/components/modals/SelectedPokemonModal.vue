@@ -41,12 +41,12 @@ const onHandleFavorite = function () {
       </div>
       <div class="body">
         <div v-for="[key, value] in pokemonProperties" :key="key" class="property-row">
-          <span class="property-name font-bold"> {{ formatWord(key) }}: </span>
+          <span class="property-name font-bold"> {{ $t(key) }}: </span>
           <span class="property-value">{{ formatWord(value) }}</span>
         </div>
       </div>
       <footer class="footer">
-        <CustomButton @action="share"> Share to my friends </CustomButton>
+        <CustomButton @action="share"> {{ $t('shareToFriends') }} </CustomButton>
         <FavoriteButton :is-favorite="isFavorite" @handle-favorite="onHandleFavorite" />
       </footer>
     </div>

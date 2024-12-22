@@ -17,12 +17,11 @@ const goToList = async function () {
   <main class="main">
     <div class="global-container">
       <WelcomeImg class="main-logo" />
-      <h1 class="title black-letter font-bold">Welcome to Pokédex</h1>
+      <h1 class="title black-letter font-bold">{{ $t('welcome') }}</h1>
       <p class="description gray-letter">
-        The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the
-        Pokémon world.
+        {{ $t('welcomeDescription') }}
       </p>
-      <CustomButton @action="goToList"> Get started </CustomButton>
+      <CustomButton @action="goToList"> {{ $t('getStarted') }} </CustomButton>
     </div>
   </main>
 </template>

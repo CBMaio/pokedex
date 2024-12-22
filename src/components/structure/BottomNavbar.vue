@@ -1,15 +1,17 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import CustomButton from './CustomButton.vue'
 import AllIcon from '@/assets/img/all-icon.svg'
 import FavoritesIcon from '@/assets/img/favorites-icon.svg'
 
 const router = useRouter()
 const route = useRoute()
+const { t } = useI18n()
 
 const buttons = [
-  { name: 'list', icon: AllIcon, label: 'All' },
-  { name: 'favorites', icon: FavoritesIcon, label: 'Favorites' },
+  { name: 'list', icon: AllIcon, label: t('all') },
+  { name: 'favorites', icon: FavoritesIcon, label: t('favorites') },
 ]
 
 const navigate = function (name) {

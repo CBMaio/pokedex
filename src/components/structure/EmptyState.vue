@@ -15,10 +15,10 @@ const goToMainScreen = function () {
 
 <template>
   <div class="container">
-    <h3 class="title black-letter font-bold">Uh-oh!</h3>
-    <p class="description gray-letter">You look lost on your journey!</p>
+    <h3 class="title black-letter font-bold">{{ $t('emptyStateTitle') }}</h3>
+    <p class="description gray-letter">{{ $t('lookLostMessage') }}</p>
 
-    <CustomButton @action="goToMainScreen"> Go back home </CustomButton>
+    <CustomButton @action="goToMainScreen"> {{ $t('goBackHome') }} </CustomButton>
   </div>
 </template>
 

@@ -14,4 +14,8 @@
   &.unselected {
     background-color: var(--lightGray);
   }
+
+  &.pressed {
+    background-color: var(--pressed-button);
+  }
 }

@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue'
+
 defineEmits(['action'])
 defineProps({
   unselected: {
@@ -6,10 +8,19 @@ defineProps({
     default: false,
   },
 })
+
+const isPressed = ref(false)
 </script>
 
 <template>
-  <button class="button" :class="{ unselected: unselected }" @click="$emit('action')">
+  <button
+    class="button"
+    :class="{ unselected: unselected, pressed: isPressed && !unselected }"
+    @mousedown="isPressed = true"
+    @mouseup="isPressed = false"
+    @mouseleave="isPressed = false"
+    @click="$emit('action')"
+  >
     <slot />
   </button>
 </template>

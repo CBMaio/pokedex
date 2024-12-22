@@ -1,11 +1,14 @@
 <script setup>
+import { useRouter } from 'vue-router'
 import WelcomeImg from '@/assets/img/welcome-img.svg'
 import CustomButton from '@/components/structure/CustomButton.vue'
-import { useRouter } from 'vue-router'
+import { usePokemonStore } from '@/stores/pokemon'
 
+const pokemonStore = usePokemonStore()
 const router = useRouter()
 
-const goToList = function () {
+const goToList = async function () {
+  await pokemonStore.setPokemons()
   router.push({ name: 'list' })
 }
 </script>

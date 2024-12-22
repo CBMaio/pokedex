@@ -9,9 +9,7 @@
 
     .list-content {
       margin: auto;
-      max-height: calc(100vh - 210px);
       max-width: var(--elements-max-widht);
-      overflow: auto;
       width: 100%;
     }
   }

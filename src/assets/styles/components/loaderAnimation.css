@@ -1,0 +1,69 @@
+.background-animation {
+  align-items: center;
+  background: #00000055;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  padding: 30px;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.pokeball {
+  animation:
+    fall ease-in-out 0.7s,
+    shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.7s 3,
+    catch 0.5s ease-out 4.5s forwards;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+
+  20% {
+    transform: translateX(-10px) rotate(-20deg);
+  }
+
+  30% {
+    transform: translateX(10px) rotate(20deg);
+  }
+
+  50% {
+    transform: translateX(-10px) rotate(-10deg);
+  }
+
+  60% {
+    transform: translateX(10px) rotate(10deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-200%);
+  }
+
+  60% {
+    transform: translateY(0);
+  }
+
+  80% {
+    transform: translateY(-10%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes catch {
+  to {
+    filter: saturate(0.8) brightness(0.8);
+  }
+}

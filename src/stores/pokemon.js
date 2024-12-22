@@ -1,17 +1,19 @@
-import { getPokemon, getPokemones } from '@/services/pokemonService'
+import { getPokemon, getPokemons } from '@/services/pokemonService'
 import { formatWord } from '@/utils'
 import { defineStore } from 'pinia'
 
 export const usePokemonStore = defineStore('pokemon', {
   state: () => ({
-    pokemones: [],
-    filteredPokemones: [],
+    pokemons: [],
+    filteredPokemons: [],
     favorites: new Map(),
     selectedPokemon: {},
+    query: '',
+    isLoading: false,
   }),
   getters: {
-    getPokemones() {
-      return this.filteredPokemones || []
+    getPokemons() {
+      return this.filteredPokemons || []
     },
     getFavorites() {
       return this.favorites
@@ -25,6 +27,9 @@ export const usePokemonStore = defineStore('pokemon', {
 
       return types.map(({ type }) => formatWord(type.name))
     },
+    getLoading() {
+      return this.isLoading
+    },
   },
   actions: {
     handleFavorite({ pokemon: { name, ...data } }) {
@@ -32,15 +37,40 @@ export const usePokemonStore = defineStore('pokemon', {
         ? this.favorites.delete(name)
         : this.favorites.set(name, { name, ...data })
     },
-    filterPokemones({ query = '' }) {
-      this.filteredPokemones = !query
-        ? this.pokemones
-        : this.pokemones.filter(({ name }) => name.includes(query.toLowerCase()))
+    filterPokemons({ query = '' }) {
+      this.filteredPokemons = !query
+        ? this.pokemons
+        : this.pokemons.filter(({ name }) => name.includes(query.toLowerCase()))
     },
-    async setPokemones() {
-      const response = await getPokemones()
-      this.pokemones = response
-      this.filteredPokemones = response
+    async setPokemons() {
+      if (this.pokemons.length) return
+
+      this.isLoading = true
+      let nextPage = null
+      const allPokemons = []
+
+      const startTime = Date.now()
+
+      do {
+        const { results, next } = await getPokemons(nextPage)
+        allPokemons.push(...results)
+        nextPage = next
+      } while (nextPage)
+
+      await this.handleLoadingTime(startTime)
+
+      this.pokemons = allPokemons
+      this.filteredPokemons = this.pokemons
+      this.isLoading = false
+    },
+
+    async handleLoadingTime(startTime) {
+      const elapsedTime = Date.now() - startTime
+      const remainingTime = 4750 - elapsedTime
+
+      if (remainingTime > 0) {
+        await delay(remainingTime)
+      }
     },
     async setSelectedPokemon({ name: selectedName }) {
       const response = await getPokemon({ name: selectedName })
@@ -51,3 +81,5 @@ export const usePokemonStore = defineStore('pokemon', {
     },
   },
 })
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))

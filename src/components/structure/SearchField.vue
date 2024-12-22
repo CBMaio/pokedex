@@ -5,7 +5,7 @@ import SearchIcon from '@/assets/img/search-icon.svg'
 const pokemonStore = usePokemonStore()
 
 const handleSearch = function (e) {
-  pokemonStore.filterPokemones({ query: e.target.value })
+  pokemonStore.filterPokemons({ query: e.target.value })
 }
 </script>
 
@@ -14,6 +14,7 @@ const handleSearch = function (e) {
     <div class="search-field">
       <SearchIcon class="search-icon" />
       <input
+        v-model="pokemonStore.query"
         type="text"
         placeholder="Search"
         class="search-element black-letter"

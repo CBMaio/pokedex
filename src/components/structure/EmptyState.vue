@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { usePokemonStore } from '@/stores/pokemon'
 import CustomButton from './CustomButton.vue'
 
 const router = useRouter()
+const route = useRoute()
 const pokemonStore = usePokemonStore()
 
 const goToMainScreen = function () {
-  pokemonStore.filterPokemons({ query: '' })
+  pokemonStore.filterPokemons({ query: '', route: route.name })
   pokemonStore.query = ''
   router.push({ name: 'list' })
 }

@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 
 const FILTERED_FAVORITES = 'filteredFavorites'
 const FILTERED_POKEMONS = 'filteredPokemons'
+const FAVORITES_ROUTE = 'favorites'
 
 export const usePokemonStore = defineStore('pokemon', {
   state: () => ({
@@ -13,7 +14,6 @@ export const usePokemonStore = defineStore('pokemon', {
     favorites: getInitialFavorites(),
     selectedPokemon: {},
     query: '',
-    isLoading: false,
   }),
   getters: {
     getPokemons() {
@@ -32,9 +32,6 @@ export const usePokemonStore = defineStore('pokemon', {
 
       return types.map(({ type }) => formatWord(type.name))
     },
-    getLoading() {
-      return this.isLoading
-    },
   },
   actions: {
     handleFavorite({ pokemon: { name, ...data } }) {
@@ -46,24 +43,13 @@ export const usePokemonStore = defineStore('pokemon', {
       saveLocalStorage(this.favorites)
     },
     filterPokemons({ query = '', route }) {
-      const isFavorites = this.isFavoritesRoute(route)
-      const selectedList = this.getSelectedList(isFavorites)
-      const selectedItems = this.getSelectedItems(isFavorites)
-      this[selectedList] = this.getFilteredItems(query, selectedItems)
-    },
-    isFavoritesRoute(route) {
-      return route === 'favorites'
-    },
-    getSelectedList(isFavorites) {
-      return isFavorites ? FILTERED_FAVORITES : FILTERED_POKEMONS
-    },
-    getSelectedItems(isFavorites) {
-      return isFavorites ? [...this.favorites.values()] : this.pokemons
-    },
-    getFilteredItems(query, items) {
-      return !query
-        ? items
-        : items.filter(({ name }) => name.toLowerCase().includes(query.toLowerCase()))
+      const isFavorites = route === FAVORITES_ROUTE
+      const selectedList = isFavorites ? FILTERED_FAVORITES : FILTERED_POKEMONS
+      const selectedItems = isFavorites ? [...this.favorites.values()] : this.pokemons
+
+      this[selectedList] = !query
+        ? selectedItems
+        : selectedItems.filter(({ name }) => name.toLowerCase().includes(query.toLowerCase()))
     },
     isFavorite({ name }) {
       return this.favorites.has(name)
@@ -71,10 +57,8 @@ export const usePokemonStore = defineStore('pokemon', {
     async setPokemons() {
       if (this.pokemons.length) return
 
-      this.isLoading = true
       let nextPage = null
       const allPokemons = []
-
       const startTime = Date.now()
 
       do {
@@ -87,7 +71,6 @@ export const usePokemonStore = defineStore('pokemon', {
 
       this.pokemons = allPokemons
       this.filteredPokemons = this.pokemons
-      this.isLoading = false
     },
     async handleLoadingTime(startTime) {
       const elapsedTime = Date.now() - startTime

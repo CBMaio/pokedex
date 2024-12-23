@@ -13,5 +13,7 @@
   "weight": "Weight",
   "types": "Types",
   "shareToFriends": "Share to my friends",
-  "copiedToClipboard": "Copied to clipboard!"
+  "copiedToClipboard": "Copied to clipboard!",
+  "errorSettingPokemons": "Error setting Pokemons",
+  "errorOpeningModal": "Error opening modal"
 }

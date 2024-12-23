@@ -13,5 +13,7 @@
   "weight": "Peso",
   "types": "Tipos",
   "shareToFriends": "Compartir con mis amigos",
-  "copiedToClipboard": "¡Copiado al portapapeles!"
+  "copiedToClipboard": "¡Copiado al portapapeles!",
+  "errorSettingPokemons": "Error al establecer los pokemons",
+  "errorOpeningModal": "Error al abrir el modal"
 }

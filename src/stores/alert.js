@@ -10,7 +10,7 @@ export const useAlertStore = defineStore('alert', {
     },
   },
   actions: {
-    addAlert({ message = 'alert', type = 'info' }) {
+    addAlert({ message, type = 'info' }) {
       const id = Date.now()
       this.alerts.set(id, { message, type })
       setTimeout(() => this.removeAlert(id), 2000)

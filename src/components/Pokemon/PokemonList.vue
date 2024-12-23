@@ -1,10 +1,14 @@
 <script setup>
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { usePokemonStore } from '@/stores/pokemon'
+import { useAlertStore } from '@/stores/alert'
 import PokemonItem from '@/components/pokemon/PokemonItem.vue'
 import SelectedPokemonModal from '@/components/modals/SelectedPokemonModal.vue'
 
+const { t } = useI18n()
 const pokemonStore = usePokemonStore()
+const alertStore = useAlertStore()
 const isOpenModal = ref(false)
 const scrollComponent = ref(null)
 const data = ref([])
@@ -33,8 +37,13 @@ const handleScroll = function () {
   }
 }
 const openPokemonModal = async function (name) {
-  await pokemonStore.setSelectedPokemon({ name })
-  isOpenModal.value = true
+  try {
+    await pokemonStore.setSelectedPokemon({ name })
+    isOpenModal.value = true
+  } catch (error) {
+    console.error('Failed to open Pokemon modal:', error)
+    alertStore.addAlert({ message: t('errorOpeningModal'), type: 'error' })
+  }
 }
 
 watch(

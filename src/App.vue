@@ -1,11 +1,8 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import { usePokemonStore } from './stores/pokemon'
 import { useAlertStore } from './stores/alert'
-import LoaderAnimation from './components/structure/LoaderAnimation.vue'
 import CustomAlert from './components/structure/CustomAlert.vue'
 
-const pokemonStore = usePokemonStore()
 const alertStore = useAlertStore()
 </script>
 
@@ -22,8 +19,7 @@ const alertStore = useAlertStore()
       />
     </div>
 
-    <LoaderAnimation v-if="pokemonStore.getLoading" />
-    <main class="main-body" v-else>
+    <main class="main-body">
       <router-view />
     </main>
   </div>

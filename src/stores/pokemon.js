@@ -20,8 +20,8 @@ export const usePokemonStore = defineStore('pokemon', {
       return this.filteredPokemons || []
     },
     getFavorites() {
-      this.filteredFavorites = Array.from(this.favorites.values()) || []
-      return this.filteredFavorites
+      this.filteredFavorites = this.filteredFavorites || Array.from(this.favorites.values())
+      return this.filteredFavorites || []
     },
     getSelectedPokemon() {
       return this.selectedPokemon
@@ -42,6 +42,7 @@ export const usePokemonStore = defineStore('pokemon', {
         ? this.favorites.delete(name)
         : this.favorites.set(name, { name, ...data })
 
+      this.filteredFavorites = Array.from(this.favorites.values())
       saveLocalStorage(this.favorites)
     },
     filterPokemons({ query = '', route }) {

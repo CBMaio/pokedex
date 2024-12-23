@@ -12,5 +12,6 @@
   "height": "Height",
   "weight": "Weight",
   "types": "Types",
-  "shareToFriends": "Share to my friends"
+  "shareToFriends": "Share to my friends",
+  "copiedToClipboard": "Copied to clipboard!"
 }

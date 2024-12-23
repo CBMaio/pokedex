@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { usePokemonStore } from '@/stores/pokemon'
 import { useAlertStore } from '@/stores/alert'
 import CloseIcon from '@/assets/img/close-icon.svg'
@@ -11,6 +12,8 @@ defineEmits(['close'])
 
 const pokemonStore = usePokemonStore()
 const alertStore = useAlertStore()
+const { t } = useI18n()
+
 const pokemon = computed(() => pokemonStore.selectedPokemon)
 const isFavorite = computed(() => pokemonStore.getFavorites.has(pokemon.value.name))
 const pokemonProperties = computed(() => {
@@ -25,7 +28,7 @@ const share = function () {
     .map(([key, value]) => `${formatWord(key)}: ${formatWord(value)}`)
     .join(', ')
   navigator.clipboard.writeText(`Check out this pokemon: ${formattedProperties}`)
-  alertStore.addAlert({ message: 'Copied to clipboard!', type: 'success' })
+  alertStore.addAlert({ message: t('copiedToClipboard'), type: 'success' })
 }
 const onHandleFavorite = function () {
   pokemonStore.handleFavorite({ pokemon: pokemon.value })

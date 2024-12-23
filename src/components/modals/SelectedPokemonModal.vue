@@ -15,7 +15,7 @@ const alertStore = useAlertStore()
 const { t } = useI18n()
 
 const pokemon = computed(() => pokemonStore.selectedPokemon)
-const isFavorite = computed(() => pokemonStore.getFavorites.has(pokemon.value.name))
+const isFavorite = computed(() => pokemonStore.isFavorite({ name: pokemon.value?.name }))
 const pokemonProperties = computed(() => {
   const { name, height, weight } = pokemon.value || {}
   const types = pokemonStore.getSelectedPokemonTypes.join(', ')

@@ -18,22 +18,20 @@ const props = defineProps({
   },
 })
 
-const loadMorePosts = function () {
+const loadMoreData = function () {
   if (offset.value >= props.pokemonList.length) return
   const moreData = props.pokemonList.slice(offset.value, offset.value + amount)
   data.value.push(...moreData)
   offset.value += amount
 }
-
 const handleScroll = function () {
   let element = scrollComponent.value
 
   const bottomOfWindow = element.scrollTop + element.clientHeight >= element.scrollHeight
   if (bottomOfWindow) {
-    loadMorePosts()
+    loadMoreData()
   }
 }
-
 const openPokemonModal = async function (name) {
   await pokemonStore.setSelectedPokemon({ name })
   isOpenModal.value = true
@@ -41,8 +39,10 @@ const openPokemonModal = async function (name) {
 
 watch(
   () => props.pokemonList,
-  (newVal) => {
-    data.value = newVal.slice(offset.value, offset.value + amount)
+  () => {
+    data.value = []
+    offset.value = 0
+    loadMoreData()
   },
   { immediate: true },
 )

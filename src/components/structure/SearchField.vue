@@ -1,11 +1,13 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import { usePokemonStore } from '@/stores/pokemon'
 import SearchIcon from '@/assets/img/search-icon.svg'
 
 const pokemonStore = usePokemonStore()
+const route = useRoute()
 
 const handleSearch = function (e) {
-  pokemonStore.filterPokemons({ query: e.target.value })
+  pokemonStore.filterPokemons({ query: e.target.value, route: route.name })
 }
 </script>
 

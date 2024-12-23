@@ -7,8 +7,7 @@ import PokemonList from '@/components/pokemon/PokemonList.vue'
 
 const pokemonStore = usePokemonStore()
 
-const isEmptyState = computed(() => !pokemonStore.getFavorites.size)
-const favoritesAsArray = computed(() => Array.from(pokemonStore.getFavorites.values()))
+const isEmptyState = computed(() => !pokemonStore.getFavorites.length)
 </script>
 
 <template>
@@ -16,7 +15,7 @@ const favoritesAsArray = computed(() => Array.from(pokemonStore.getFavorites.val
     <div class="list-body">
       <div class="list-content">
         <EmptyState v-if="isEmptyState" />
-        <PokemonList :pokemon-list="favoritesAsArray" />
+        <PokemonList :pokemon-list="pokemonStore.getFavorites" />
       </div>
     </div>
 

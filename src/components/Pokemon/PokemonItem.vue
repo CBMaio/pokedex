@@ -15,7 +15,7 @@ const props = defineProps({
 
 const pokemonStore = usePokemonStore()
 
-const isFavorite = computed(() => pokemonStore.getFavorites.has(props.pokemon.name))
+const isFavorite = computed(() => pokemonStore.isFavorite({ name: props.pokemon?.name }))
 
 const onHandleFavorite = function () {
   pokemonStore.handleFavorite({ pokemon: props.pokemon })
